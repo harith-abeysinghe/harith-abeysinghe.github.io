@@ -65,12 +65,15 @@ footer {
 
 .container {
   display: flex;
+  margin-left: 10px;
+  margin-right: 20px;
 }
 
 aside {
   flex: 0 0 20%;
   background-color: #4e4e4e; /* Add the desired color for the aside pane */
   color: white; /* Add the desired text color for the aside pane */
+  float: left;
 }
 main {
   flex: 1;
