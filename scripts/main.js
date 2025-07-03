@@ -33,6 +33,65 @@ interactiveElements.forEach((el) => {
 	});
 });
 
+// Navbar visibility logic
+const mainNav = document.getElementById("main-nav");
+let lastScrollPosition = 0;
+let isTopPage = true;
+
+// Handle nav visibility based on scroll/hover
+function handleNavVisibility() {
+	const currentScroll = window.pageYOffset;
+
+	// Check if we're on top page (home section)
+	isTopPage = currentScroll < window.innerHeight;
+
+	if (isTopPage) {
+		mainNav.classList.remove("hidden");
+		return;
+	}
+
+	// On other pages, show nav when mouse is near top
+	const mouseNearTop = mouseY < 100;
+	const scrollingUp = currentScroll < lastScrollPosition;
+
+	if (mouseNearTop || scrollingUp) {
+		mainNav.classList.remove("hidden");
+	} else {
+		mainNav.classList.add("hidden");
+	}
+
+	lastScrollPosition = currentScroll;
+}
+
+let mouseY = 0;
+document.addEventListener("mousemove", (e) => {
+	mouseY = e.clientY;
+	throttledHandleNavVisibility();
+});
+
+document.addEventListener("scroll", throttledHandleNavVisibility);
+
+window.addEventListener("load", () => {
+	// Initial check
+	handleNavVisibility();
+	// Smoother transition for show/hide
+	mainNav.style.transition =
+		"transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s ease";
+});
+
+// Smoother mouse tracking near top
+function throttle(callback, delay) {
+	let lastCall = 0;
+	return function () {
+		const now = new Date().getTime();
+		if (now - lastCall < delay) return;
+		lastCall = now;
+		callback.apply(this, arguments);
+	};
+}
+
+const throttledHandleNavVisibility = throttle(handleNavVisibility, 50);
+
 // Simple fade-in animation on scroll
 document.addEventListener("DOMContentLoaded", function () {
 	const fadeElements = document.querySelectorAll(".fade-in");
