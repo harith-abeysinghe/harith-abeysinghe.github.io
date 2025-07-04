@@ -132,3 +132,36 @@ document.addEventListener("DOMContentLoaded", function () {
 		});
 	});
 });
+
+// Project search filter logic for dynamically loaded projects section
+function enableProjectSearchFilter() {
+	const searchInput = document.getElementById('project-search');
+	if (!searchInput) return;
+	const projectCards = document.querySelectorAll('.project-card');
+	searchInput.addEventListener('input', function() {
+		const query = searchInput.value.toLowerCase().replace(/,/g, ' ');
+		const terms = query.split(/\s+/).filter(Boolean);
+		projectCards.forEach(card => {
+			const techs = card.getAttribute('data-tech');
+			if (!terms.length) {
+				card.style.display = '';
+				return;
+			}
+			const matches = terms.every(term => techs.includes(term));
+			card.style.display = matches ? '' : 'none';
+		});
+	});
+}
+
+// Patch the section loader to enable the filter after loading projects
+const origLoadSection = window.loadSection;
+window.loadSection = function(id, url) {
+	fetch(url)
+		.then(response => response.text())
+		.then(html => {
+			document.getElementById(id).innerHTML = html;
+			if (id === 'projects-section') {
+				enableProjectSearchFilter();
+			}
+		});
+};
