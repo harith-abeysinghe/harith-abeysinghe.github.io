@@ -63,6 +63,19 @@ function handleNavVisibility() {
 	lastScrollPosition = currentScroll;
 }
 
+// Smoother mouse tracking near top
+function throttle(callback, delay) {
+	let lastCall = 0;
+	return function () {
+		const now = new Date().getTime();
+		if (now - lastCall < delay) return;
+		lastCall = now;
+		callback.apply(this, arguments);
+	};
+}
+
+const throttledHandleNavVisibility = throttle(handleNavVisibility, 50);
+
 let mouseY = 0;
 document.addEventListener("mousemove", (e) => {
 	mouseY = e.clientY;
@@ -78,19 +91,6 @@ window.addEventListener("load", () => {
 	mainNav.style.transition =
 		"transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s ease";
 });
-
-// Smoother mouse tracking near top
-function throttle(callback, delay) {
-	let lastCall = 0;
-	return function () {
-		const now = new Date().getTime();
-		if (now - lastCall < delay) return;
-		lastCall = now;
-		callback.apply(this, arguments);
-	};
-}
-
-const throttledHandleNavVisibility = throttle(handleNavVisibility, 50);
 
 // Simple fade-in animation on scroll
 document.addEventListener("DOMContentLoaded", function () {
