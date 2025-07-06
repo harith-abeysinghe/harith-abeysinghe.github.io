@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Project 2 - Health & Fitness Mobile App</title>
+  <title>Hand Tremor Based Recognition System</title>
   <link rel="stylesheet" href="../css/style.css" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -11,46 +11,49 @@
 <body class="bg-gray-900 text-white min-h-screen flex flex-col justify-between">
   <div class="cursor"></div>
   <div class="cursor-follower"></div>
-  <div class="max-w-3xl mx-auto px-4 py-12">
+  <div class="max-w-4xl mx-auto px-4 py-12">
     <h1 class="text-4xl md:text-5xl font-bold mb-6 text-center">
-      <span class="gradient-text">Health & Fitness Mobile App</span>
+      <span class="gradient-text">Hand Tremor Based Recognition System</span>
     </h1>
     <p class="mb-6 text-lg text-center">
-      Cross-platform mobile application for personalized workout plans and nutrition tracking with social features.
+      Developed a machine learning solution for multi-class classification of hand tremor data captured via a Leap Motion device. The project investigated using hand tremor as a behavioral biometric for security applications.
     </p>
     <div class="mb-6 flex flex-wrap justify-center gap-3">
       <div class="skill-badge px-4 py-2 rounded-full flex items-center bg-gray-800 text-white">
-        <i class="fab fa-react text-blue-400 mr-2"></i>
-        <span>React Native</span>
+        <i class="fab fa-python text-blue-400 mr-2"></i>
+        <span>Python</span>
       </div>
       <div class="skill-badge px-4 py-2 rounded-full flex items-center bg-gray-800 text-white">
-        <i class="fas fa-fire text-yellow-400 mr-2"></i>
-        <span>Firebase</span>
+        <i class="fas fa-calculator text-green-400 mr-2"></i>
+        <span>NumPy</span>
       </div>
       <div class="skill-badge px-4 py-2 rounded-full flex items-center bg-gray-800 text-white">
-        <i class="fas fa-sync-alt text-purple-400 mr-2"></i>
-        <span>Redux</span>
+        <i class="fas fa-brain text-orange-400 mr-2"></i>
+        <span>Scikit-Learn</span>
       </div>
       <div class="skill-badge px-4 py-2 rounded-full flex items-center bg-gray-800 text-white">
-        <i class="fab fa-node-js text-green-500 mr-2"></i>
-        <span>Node.js</span>
+        <i class="fas fa-table text-blue-400 mr-2"></i>
+        <span>Pandas</span>
       </div>
     </div>
     <div class="flex flex-col md:flex-row justify-center gap-4 mb-8">
       <a href="https://github.com/yourusername/project2" target="_blank" class="px-5 py-2 bg-gray-800 hover:bg-gray-700 rounded text-blue-400 font-medium flex items-center gap-2"><i class="fab fa-github"></i> GitHub Repo</a>
-      <a href="https://yourusername.github.io/project2" target="_blank" class="px-5 py-2 bg-gray-800 hover:bg-gray-700 rounded text-emerald-400 font-medium flex items-center gap-2"><i class="fas fa-external-link-alt"></i> GitHub Page</a>
+      <a href="https://yourusername.github.io/project2" target="_blank" class="px-5 py-2 bg-gray-800 hover:bg-gray-700 rounded text-emerald-400 font-medium flex items-center gap-2"><i class="fas fa-file-alt"></i> Research Paper</a>
     </div>
     <div class="mb-8">
       <h2 class="text-2xl font-semibold mb-2">My Contribution</h2>
-      <p class="text-gray-300">I developed the mobile app UI, integrated fitness APIs, and implemented real-time social features. I also handled deployment to app stores and user analytics integration.</p>
+      <ul class="text-gray-300 list-disc list-inside space-y-2">
+        <li>Performed data preprocessing and exploratory data analysis to prepare hand tremor data for model training.</li>
+        <li>Designed a Naive Bayes classification model that achieved 95.9% accuracy and evaluated performance using accuracy, precision, recall, and F1-score to ensure robustness and reliability.</li>
+      </ul>
     </div>
     <div class="mb-8">
       <h2 class="text-2xl font-semibold mb-4">Project Images</h2>
       <div class="w-full max-w-4xl mx-auto mt-8 mb-8">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          <img src="../assets/804.gif" alt="Screenshot 1" class="w-full h-64 object-cover rounded-lg" />
-          <img src="../assets/portfolio.png" alt="Screenshot 2" class="w-full h-64 object-cover rounded-lg" />
-          <img src="../assets/profile_picture.jpg" alt="Screenshot 3" class="w-full h-64 object-cover rounded-lg" />
+          <img src="../assets/804.gif" alt="Leap Motion Device" class="w-full h-64 object-cover rounded-lg" />
+          <img src="../assets/profile-pic.png" alt="Hand Tremor Data" class="w-full h-64 object-cover rounded-lg" />
+          <img src="../assets/profile-pic.png" alt="Classification Results" class="w-full h-64 object-cover rounded-lg" />
           <!-- Add more images as needed -->
         </div>
       </div>
