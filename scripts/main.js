@@ -90,12 +90,13 @@
 	const events = [
 		{ type: "EnrolledIn", degree: "BSc Computer Engineering", uni: "University of Peradeniya" },
 		{ type: "AwardWon", event: "IEEE Innovation Nation", place: 3, project: "ARCombat" },
-		{ type: "InternshipStarted", company: "GTN Technologies", stack: "Spring Boot · GraphQL" },
+		{ type: "InternshipStarted", company: "GTN Tech", stack: "React · GraphQL · Spring Boot" },
 		{ type: "ResearchCompleted", topic: "Latency-aware K8s scaling" },
 		{ type: "Graduated", gpa: 3.95 },
-		{ type: "RoleStarted", company: "ISA", title: "Software Engineer" },
-		{ type: "ProjectShipped", name: "Debezium CDC pipeline" },
-		{ type: "ProjectShipped", name: "Flink Academy" },
+		{ type: "RoleStarted", company: "ISA", team: "AeroSearch" },
+		{ type: "MigrationShipped", from: "legacy ETL", to: "event-driven sync" },
+		{ type: "RoleStarted", company: "Sysco LABS", team: "CES-1" },
+		{ type: "UpgradeShipped", from: "Java 17", to: "Java 25 + Spring Boot 4" },
 		{ type: "NowLearning", topic: "Kafka Streams internals" },
 	];
 	const esc = (s) => String(s).replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[c]);

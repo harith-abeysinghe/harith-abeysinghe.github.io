@@ -45,7 +45,7 @@
 					<p class="lede">
 						I design services that talk in <strong>events</strong>: Spring Boot microservices, Apache Kafka and Flink pipelines,
 						change data capture, and Kubernetes platforms where latency and correctness matter.
-						Software Engineer at <strong>ISA</strong>.
+						Software Engineer at <strong>Sysco LABS</strong>.
 					</p>
 					<div class="cta">
 						<a class="btn btn-primary" href="#projects">View projects</a>
@@ -98,12 +98,17 @@
 						Kubernetes workloads on the fly without breaking latency targets.
 					</p>
 					<p>
+						At <strong>Sysco LABS</strong> I build backend services on AWS and run Apache Flink pipelines in production.
+						Before that, at <strong>ISA</strong>, I moved a flight-search platform's data synchronisation from legacy ETL
+						jobs to an <strong>event-driven architecture</strong>.
+					</p>
+					<p>
 						Right now I'm going deep on stream processing internals (Kafka Streams, consumer-group rebalancing, Flink state and
 						checkpointing) and building interactive tools that teach them.
 					</p>
 					<div class="stats">
 						<div class="stat"><b>3.95</b><span>GPA · BSc (Hons) Computer Engineering, University of Peradeniya</span></div>
-						<div class="stat"><b>ISA</b><span>Software Engineer since Sept 2025</span></div>
+						<div class="stat"><b>Sysco</b><span>Software Engineer at Sysco LABS Sri Lanka since Apr 2026</span></div>
 						<div class="stat"><b>LK</b><span>Panadura, Sri Lanka</span></div>
 					</div>
 				</div>
@@ -119,9 +124,9 @@
 			<div class="stack-grid">
 				<div class="stack-card reveal"><h3>Languages</h3><ul><li>Java</li><li>Python</li><li>TypeScript</li><li>JavaScript</li><li>SQL</li><li>Go</li></ul></div>
 				<div class="stack-card reveal"><h3>Backend</h3><ul><li>Spring Boot</li><li>Spring Security</li><li>Spring Data JPA</li><li>Node.js</li><li>GraphQL</li><li>REST</li></ul></div>
-				<div class="stack-card reveal hl"><h3>Streaming &amp; EDA</h3><ul><li>Apache Kafka</li><li>Apache Flink</li><li>Debezium CDC</li><li>Kafka Streams</li><li>Apache Beam</li></ul></div>
-				<div class="stack-card reveal"><h3>Data</h3><ul><li>PostgreSQL</li><li>MySQL</li><li>Redis</li><li>MongoDB</li><li>Flyway</li></ul></div>
-				<div class="stack-card reveal"><h3>Cloud &amp; Ops</h3><ul><li>Kubernetes</li><li>Docker</li><li>Prometheus</li><li>Grafana</li><li>GitHub Actions</li><li>AWS</li></ul></div>
+				<div class="stack-card reveal hl"><h3>Streaming &amp; EDA</h3><ul><li>Apache Kafka</li><li>Apache Flink</li><li>Debezium CDC</li><li>Kafka Streams</li><li>AWS Kinesis</li><li>AWS SNS</li><li>Apache Beam</li></ul></div>
+				<div class="stack-card reveal"><h3>Data</h3><ul><li>PostgreSQL</li><li>MySQL</li><li>Redis</li><li>MongoDB</li><li>OpenSearch</li><li>Flyway</li></ul></div>
+				<div class="stack-card reveal"><h3>Cloud &amp; Ops</h3><ul><li>AWS Lambda</li><li>ECS</li><li>EC2</li><li>Kubernetes</li><li>Docker</li><li>Datadog</li><li>Prometheus</li><li>Grafana</li><li>GitHub Actions</li></ul></div>
 				<div class="stack-card reveal"><h3>Quality</h3><ul><li>JUnit 5</li><li>Testcontainers</li><li>JMeter</li><li>OpenAPI</li></ul></div>
 			</div>
 		</section>
@@ -202,24 +207,50 @@
 			</div>
 			<ol class="timeline">
 				<li class="reveal">
+					<span class="t-offset">offset 3 · current</span>
+					<div class="t-card">
+						<div class="t-head"><h3>Software Engineer</h3><span class="t-date">Apr 2026 – present</span></div>
+						<p class="t-org">Sysco LABS Sri Lanka</p>
+						<p class="t-team">Core Enterprise Services (CES-1) · Commercial Technology product domain · Colombo, hybrid</p>
+						<ul>
+							<li>Build and maintain backend services and APIs for the Commercial Technology domain.</li>
+							<li>Upgraded production services from Java 17 to <b>Java 25 and Spring Boot 4</b>, fixing compatibility issues before release for a clean rollout.</li>
+							<li>Automated parking of non-production <b>Apache Flink</b> pipelines, cutting AWS cost and manual effort.</li>
+							<li>Fixed security vulnerabilities across cloud resources, applications, Lambda functions, EC2 instances and Docker images.</li>
+							<li>Kept cloud resources compliant with Datadog and AWS Cloud Custodian tagging standards.</li>
+						</ul>
+						<ul class="chips"><li>Java</li><li>Spring Boot</li><li>Apache Flink</li><li>AWS Lambda</li><li>ECS</li><li>EC2</li><li>Kinesis</li><li>SNS</li><li>OpenSearch</li><li>Docker</li><li>Datadog</li></ul>
+					</div>
+				</li>
+				<li class="reveal">
 					<span class="t-offset">offset 2</span>
 					<div class="t-card">
-						<div class="t-head"><h3>Software Engineer</h3><span class="t-date">Sept 2025 – present</span></div>
+						<div class="t-head"><h3>Software Engineer</h3><span class="t-date">Aug 2025 – Apr 2026</span></div>
 						<p class="t-org">ISA</p>
+						<p class="t-team">AeroSearch team · distributed flight search · Colombo</p>
+						<ul>
+							<li>Moved core data synchronisation from legacy ETL workflows to an <b>event-driven architecture</b>, improving data consistency and reliability across services.</li>
+							<li>Introduced event-based propagation of master data between services.</li>
+							<li>Optimised PostgreSQL queries to reduce database load and speed up responses.</li>
+							<li>Improved error handling and traceability across distributed services, shortening production debugging.</li>
+							<li>Upgraded vulnerable dependencies and core libraries, and modernised the test infrastructure for current Java and Spring Boot.</li>
+						</ul>
+						<ul class="chips"><li>Java</li><li>Spring Boot</li><li>PostgreSQL</li><li>Event-driven architecture</li></ul>
 					</div>
 				</li>
 				<li class="reveal">
 					<span class="t-offset">offset 1</span>
 					<div class="t-card">
-						<div class="t-head"><h3>Software Engineer Intern</h3><span class="t-date">July 2024 – Jan 2025</span></div>
-						<p class="t-org">GTN Technologies (Pvt) Ltd</p>
+						<div class="t-head"><h3>Software Engineer Intern</h3><span class="t-date">Jul 2024 – Jan 2025</span></div>
+						<p class="t-org">GTN Tech</p>
+						<p class="t-team">FinTech application · full-stack · Colombo, hybrid</p>
 						<ul>
-							<li>Helped rewrite a legacy system on a modern microservices architecture.</li>
-							<li>Built backend services with clean API design and consistent data across services.</li>
-							<li>Optimised APIs and database schemas to cut response latency.</li>
-							<li>Built frontend components in a micro-frontend architecture.</li>
+							<li>Built React data grids and forms with TypeScript.</li>
+							<li>Implemented GraphQL queries and mutations for complex data operations between client and server.</li>
+							<li>Created PostgreSQL views and procedures to streamline data management.</li>
+							<li>Worked in agile sprints, troubleshooting and optimising system integration with the team.</li>
 						</ul>
-						<ul class="chips"><li>Java</li><li>Spring Boot</li><li>PostgreSQL</li><li>GraphQL</li><li>TypeScript</li><li>React</li><li>AWS</li></ul>
+						<ul class="chips"><li>React</li><li>TypeScript</li><li>GraphQL</li><li>Spring Boot</li><li>Java</li><li>PostgreSQL</li></ul>
 					</div>
 				</li>
 				<li class="reveal">
