@@ -39,7 +39,7 @@
 			<canvas id="streamCanvas" aria-hidden="true"></canvas>
 			<div class="hero-inner">
 				<div class="hero-text reveal">
-					<p class="eyebrow"><span class="pulse"></span>producer: <b>harith</b> · topic: <b>backend.engineering</b> · status: <b class="ok">LIVE</b></p>
+					<p class="eyebrow"><span class="pulse"></span>Software Engineer · <b>Sysco LABS</b> · Colombo, Sri Lanka</p>
 					<h1>Harith<br /><span class="grad">Abeysinghe</span></h1>
 					<p class="role">Backend engineer building <span class="typed" id="typed">event-driven systems</span><span class="caret">|</span></p>
 					<p class="lede">
@@ -60,17 +60,17 @@
 					</div>
 				</div>
 
-				<div class="terminal reveal" aria-label="Career events replayed as a Kafka topic">
+				<div class="terminal reveal" aria-label="Career events log">
 					<div class="term-bar">
 						<span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
 						<span class="term-title">harith@cluster: ~</span>
 					</div>
-					<pre class="term-body"><span class="prompt">$</span> kafka-console-consumer --topic harith.career --from-beginning
+					<pre class="term-body"><span class="prompt">$</span> tail -f ~/career/events.log
 <span id="termLines"></span><span class="term-cursor">▋</span></pre>
 				</div>
 			</div>
 			<a href="#about" class="scroll-hint" aria-label="Scroll to about">
-				<span>consume next</span>
+				<span>scroll</span>
 				<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16l-6-6h12z"/></svg>
 			</a>
 		</section>
@@ -78,7 +78,6 @@
 		<!-- ============ ABOUT ============ -->
 		<section class="section" id="about">
 			<div class="section-head reveal">
-				<span class="topic">topic: profile.about · partition 0</span>
 				<h2>About me</h2>
 			</div>
 			<div class="about-grid">
@@ -118,7 +117,6 @@
 		<!-- ============ STACK ============ -->
 		<section class="section" id="stack">
 			<div class="section-head reveal">
-				<span class="topic">topic: skills.stack · partition 1</span>
 				<h2>Tech stack</h2>
 			</div>
 			<div class="stack-grid">
@@ -134,47 +132,46 @@
 		<!-- ============ PROJECTS ============ -->
 		<section class="section" id="projects">
 			<div class="section-head reveal">
-				<span class="topic">topic: work.projects · partition 2</span>
 				<h2>Featured projects</h2>
 			</div>
 			<div class="project-grid">
 				<article class="project reveal">
-					<div class="p-meta"><span class="offset">offset 0</span><span class="tag eda">streaming</span></div>
+					<div class="p-meta"><span class="tag eda">streaming</span></div>
 					<h3>Flink Academy</h3>
 					<p>Interactive study app for Apache Flink and Beam on Flink: 15 unlockable levels, animated lesson diagrams, quizzes, and a Pipeline Lab that <b>simulates a Flink cluster</b> and draws the job graph like the real dashboard.</p>
 					<ul class="chips"><li>JavaScript</li><li>Python</li><li>Apache Flink</li><li>Docker</li></ul>
 					<a class="p-link" href="https://github.com/harith-abeysinghe/flink-academy" target="_blank" rel="noopener">view code →</a>
 				</article>
 				<article class="project reveal">
-					<div class="p-meta"><span class="offset">offset 1</span><span class="tag">backend</span></div>
+					<div class="p-meta"><span class="tag">backend</span></div>
 					<h3>Secure Expense Tracker API</h3>
 					<p>Production-style REST API with <b>rotating refresh tokens and reuse detection</b>, tenant isolation, role-based admin, Flyway migrations, Testcontainers tests and CI.</p>
 					<ul class="chips"><li>Java</li><li>Spring Boot</li><li>Spring Security</li><li>PostgreSQL</li></ul>
 					<a class="p-link" href="https://github.com/harith-abeysinghe/secure-expense-tracker-api" target="_blank" rel="noopener">view code →</a>
 				</article>
 				<article class="project reveal">
-					<div class="p-meta"><span class="offset">offset 2</span><span class="tag eda">CDC</span></div>
+					<div class="p-meta"><span class="tag eda">CDC</span></div>
 					<h3>Debezium CDC Pipeline</h3>
 					<p>Streams every insert, update and delete from <b>PostgreSQL's write-ahead log into Kafka</b> (KRaft mode) with Debezium, consumed by a Spring Boot service.</p>
 					<ul class="chips"><li>Debezium</li><li>Kafka</li><li>PostgreSQL</li><li>Spring Boot</li></ul>
 					<a class="p-link" href="https://github.com/harith-abeysinghe/debezium-example" target="_blank" rel="noopener">view code →</a>
 				</article>
 				<article class="project reveal">
-					<div class="p-meta"><span class="offset">offset 3</span><span class="tag">research</span></div>
+					<div class="p-meta"><span class="tag">research</span></div>
 					<h3>Latency-Aware Resource Management in Kubernetes</h3>
 					<p>Final-year research: an auto-updater reads Prometheus history and <b>resizes pod CPU and memory live</b>, while load tests measure the latency cost of each change.</p>
 					<ul class="chips"><li>Kubernetes</li><li>Prometheus</li><li>Python</li><li>Go</li></ul>
 					<a class="p-link" href="https://github.com/harith-abeysinghe/e19-4yp-AI-Dirven-Latency-Constrained-Resource-Management-In-Kubernetes" target="_blank" rel="noopener">view code →</a>
 				</article>
 				<article class="project reveal">
-					<div class="p-meta"><span class="offset">offset 4</span><span class="tag">data</span></div>
+					<div class="p-meta"><span class="tag">data</span></div>
 					<h3>CAL Fund Analysis</h3>
 					<p>Pipeline that tracks daily prices of 15 unit trusts since 2014, cleans bad data, and scores each fund on <b>return and risk</b>. Updates itself on a GitHub Actions schedule.</p>
 					<ul class="chips"><li>Python</li><li>GitHub Actions</li><li>Next.js</li></ul>
 					<a class="p-link" href="https://github.com/harith-abeysinghe/cal-fund-analysis" target="_blank" rel="noopener">view code →</a>
 				</article>
 				<article class="project reveal">
-					<div class="p-meta"><span class="offset">offset 5</span><span class="tag eda">events</span></div>
+					<div class="p-meta"><span class="tag eda">events</span></div>
 					<h3>Crypto News Scraper &amp; Telegram Bot</h3>
 					<p>Scrapes crypto news by topic, de-duplicates articles in MongoDB, and <b>pushes new ones to a Telegram channel</b> through a bot.</p>
 					<ul class="chips"><li>Python</li><li>MongoDB</li><li>Telegram API</li></ul>
@@ -202,12 +199,10 @@
 		<!-- ============ EXPERIENCE ============ -->
 		<section class="section" id="experience">
 			<div class="section-head reveal">
-				<span class="topic">topic: career.timeline · partition 3</span>
 				<h2>Experience</h2>
 			</div>
 			<ol class="timeline">
 				<li class="reveal">
-					<span class="t-offset">offset 3 · current</span>
 					<div class="t-card">
 						<div class="t-head"><h3>Software Engineer</h3><span class="t-date">Apr 2026 – present</span></div>
 						<p class="t-org">Sysco LABS Sri Lanka</p>
@@ -223,7 +218,6 @@
 					</div>
 				</li>
 				<li class="reveal">
-					<span class="t-offset">offset 2</span>
 					<div class="t-card">
 						<div class="t-head"><h3>Software Engineer</h3><span class="t-date">Aug 2025 – Apr 2026</span></div>
 						<p class="t-org">ISA</p>
@@ -239,7 +233,6 @@
 					</div>
 				</li>
 				<li class="reveal">
-					<span class="t-offset">offset 1</span>
 					<div class="t-card">
 						<div class="t-head"><h3>Software Engineer Intern</h3><span class="t-date">Jul 2024 – Jan 2025</span></div>
 						<p class="t-org">GTN Tech</p>
@@ -254,7 +247,6 @@
 					</div>
 				</li>
 				<li class="reveal">
-					<span class="t-offset">offset 0</span>
 					<div class="t-card">
 						<div class="t-head"><h3>BSc (Hons) Computer Engineering</h3><span class="t-date">GPA 3.95 / 4.00</span></div>
 						<p class="t-org">University of Peradeniya</p>
@@ -273,7 +265,6 @@
 		<!-- ============ CONTACT ============ -->
 		<section class="section contact" id="contact">
 			<div class="section-head reveal">
-				<span class="topic">topic: inbox · partition 4</span>
 				<h2>Let's build something</h2>
 				<p class="section-sub">Open to conversations about backend, streaming and distributed-systems work.</p>
 			</div>
@@ -296,7 +287,7 @@
 
 	<footer class="footer">
 		<span><span class="brand-dot"></span>harith.abeysinghe</span>
-		<span class="muted">consumer lag: 0 · © <span id="year">2026</span></span>
+		<span class="muted">© <span id="year">2026</span> Harith Abeysinghe</span>
 	</footer>
 
 	<script src="scripts/main.js"></script>

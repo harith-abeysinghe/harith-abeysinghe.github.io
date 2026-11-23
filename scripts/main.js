@@ -100,11 +100,11 @@
 		{ type: "NowLearning", topic: "Kafka Streams internals" },
 	];
 	const esc = (s) => String(s).replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[c]);
-	const renderEvent = (ev, offset) => {
+	const renderEvent = (ev) => {
 		const body = Object.entries(ev)
 			.map(([k, v]) => `<span class="k">"${esc(k)}"</span>:` + (typeof v === "number" ? `<span class="n">${v}</span>` : `<span class="s">"${esc(v)}"</span>`))
 			.join(", ");
-		return `<span class="term-line"><span class="meta">p${offset % 3}@${offset} </span>{${body}}</span>`;
+		return `<span class="term-line">{${body}}</span>`;
 	};
 	const termLines = $("#termLines");
 	if (termLines) {
@@ -119,14 +119,14 @@
 					k++;
 					setTimeout(push, 650 + Math.random() * 500);
 				} else {
-					termLines.insertAdjacentHTML("beforeend", `<span class="term-line"><span class="meta">… caught up · lag 0 · waiting for the next event</span></span>`);
+					termLines.insertAdjacentHTML("beforeend", `<span class="term-line"><span class="meta">… waiting for the next event</span></span>`);
 				}
 			};
 			setTimeout(push, 900);
 		}
 	}
 
-	/* ---------- hero: event-stream canvas (producers → partitions → consumers) ---------- */
+	/* ---------- hero: animated event-stream background ---------- */
 	const canvas = $("#streamCanvas");
 	if (canvas && canvas.getContext) {
 		const ctx = canvas.getContext("2d");
@@ -150,17 +150,14 @@
 		};
 		const draw = (t) => {
 			ctx.clearRect(0, 0, w, h);
-			// partition lanes with offset ticks
-			lanes.forEach((lane, i) => {
+			// stream lanes with moving ticks
+			lanes.forEach((lane) => {
 				ctx.strokeStyle = "rgba(38,56,86,0.55)";
 				ctx.lineWidth = 1;
 				ctx.beginPath(); ctx.moveTo(0, lane.y); ctx.lineTo(w, lane.y); ctx.stroke();
 				ctx.fillStyle = "rgba(38,56,86,0.7)";
 				const shift = reduceMotion ? 0 : (t * 0.02 * lane.speed) % 60;
 				for (let x = -shift; x < w; x += 60) ctx.fillRect(x, lane.y - 3, 1, 6);
-				ctx.fillStyle = "rgba(91,107,133,0.9)";
-				ctx.font = "11px JetBrains Mono, monospace";
-				ctx.fillText(`partition-${i}`, w - 96, lane.y - 8);
 			});
 			// events
 			particles.forEach((p) => {
