@@ -1,167 +1,249 @@
-// Custom cursor effect
-const cursor = document.querySelector(".cursor");
-const cursorFollower = document.querySelector(".cursor-follower");
+(() => {
+	"use strict";
 
-document.addEventListener("mousemove", (e) => {
-	cursor.style.left = e.clientX + "px";
-	cursor.style.top = e.clientY + "px";
+	const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+	const $ = (sel, root = document) => root.querySelector(sel);
+	const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 
-	setTimeout(() => {
-		cursorFollower.style.left = e.clientX + "px";
-		cursorFollower.style.top = e.clientY + "px";
-	}, 100);
-});
+	/* ---------- nav: scrolled state, active section, mobile menu ---------- */
+	const nav = $("#nav");
+	const navLinks = $("#navLinks");
+	const navToggle = $("#navToggle");
 
-// Interactive elements effect
-const interactiveElements = document.querySelectorAll(
-	"a, button, .project-card, .skill-badge"
-);
+	const onScroll = () => nav.classList.toggle("scrolled", window.scrollY > 10);
+	window.addEventListener("scroll", onScroll, { passive: true });
+	onScroll();
 
-interactiveElements.forEach((el) => {
-	el.addEventListener("mouseenter", () => {
-		cursor.style.transform = "translate(-50%, -50%) scale(1.5)";
-		cursor.style.background = "rgba(59, 130, 246, 0.8)";
-		cursorFollower.style.transform = "translate(-50%, -50%) scale(0.5)";
-		cursorFollower.style.borderColor = "rgba(59, 130, 246, 0.8)";
+	navToggle.addEventListener("click", () => {
+		const open = navLinks.classList.toggle("open");
+		navToggle.setAttribute("aria-expanded", String(open));
 	});
+	$$("a", navLinks).forEach((a) =>
+		a.addEventListener("click", () => {
+			navLinks.classList.remove("open");
+			navToggle.setAttribute("aria-expanded", "false");
+		})
+	);
 
-	el.addEventListener("mouseleave", () => {
-		cursor.style.transform = "translate(-50%, -50%) scale(1)";
-		cursor.style.background = "rgba(59, 130, 246, 0.5)";
-		cursorFollower.style.transform = "translate(-50%, -50%) scale(1)";
-		cursorFollower.style.borderColor = "rgba(59, 130, 246, 0.3)";
-	});
-});
-
-// Navbar visibility logic
-const mainNav = document.getElementById("main-nav");
-let lastScrollPosition = 0;
-let isTopPage = true;
-
-// Handle nav visibility based on scroll/hover
-function handleNavVisibility() {
-	const currentScroll = window.pageYOffset;
-
-	// Check if we're on top page (home section)
-	isTopPage = currentScroll < window.innerHeight;
-
-	if (isTopPage) {
-		mainNav.classList.remove("hidden");
-		return;
-	}
-
-	// On other pages, show nav when mouse is near top
-	const mouseNearTop = mouseY < 100;
-	const scrollingUp = currentScroll < lastScrollPosition;
-
-	if (mouseNearTop || scrollingUp) {
-		mainNav.classList.remove("hidden");
-	} else {
-		mainNav.classList.add("hidden");
-	}
-
-	lastScrollPosition = currentScroll;
-}
-
-// Smoother mouse tracking near top
-function throttle(callback, delay) {
-	let lastCall = 0;
-	return function () {
-		const now = new Date().getTime();
-		if (now - lastCall < delay) return;
-		lastCall = now;
-		callback.apply(this, arguments);
-	};
-}
-
-const throttledHandleNavVisibility = throttle(handleNavVisibility, 50);
-
-let mouseY = 0;
-document.addEventListener("mousemove", (e) => {
-	mouseY = e.clientY;
-	throttledHandleNavVisibility();
-});
-
-document.addEventListener("scroll", throttledHandleNavVisibility);
-
-window.addEventListener("load", () => {
-	// Initial check
-	handleNavVisibility();
-	// Smoother transition for show/hide
-	mainNav.style.transition =
-		"transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s ease";
-});
-
-// Simple fade-in animation on scroll
-document.addEventListener("DOMContentLoaded", function () {
-	const fadeElements = document.querySelectorAll(".fade-in");
-
-	const fadeInOnScroll = function () {
-		fadeElements.forEach((element) => {
-			const elementTop = element.getBoundingClientRect().top;
-			const windowHeight = window.innerHeight;
-
-			if (elementTop < windowHeight - 100) {
-				element.style.opacity = "1";
-				element.style.transform = "translateY(0)";
-			}
-		});
-	};
-
-	// Set initial state
-	fadeElements.forEach((element) => {
-		element.style.opacity = "0";
-		element.style.transform = "translateY(20px)";
-		element.style.transition = "opacity 0.6s ease, transform 0.6s ease";
-	});
-
-	// Check on load
-	fadeInOnScroll();
-
-	// Check on scroll
-	window.addEventListener("scroll", fadeInOnScroll);
-
-	// Smooth scrolling for navigation
-	document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-		anchor.addEventListener("click", function (e) {
-			e.preventDefault();
-
-			document.querySelector(this.getAttribute("href")).scrollIntoView({
-				behavior: "smooth",
+	const sectionLinks = new Map($$("a", navLinks).map((a) => [a.getAttribute("href").slice(1), a]));
+	const spy = new IntersectionObserver(
+		(entries) => {
+			entries.forEach((e) => {
+				const link = sectionLinks.get(e.target.id);
+				if (link && e.isIntersecting) {
+					sectionLinks.forEach((l) => l.classList.remove("active"));
+					link.classList.add("active");
+				}
 			});
-		});
+		},
+		{ rootMargin: "-45% 0px -50% 0px" }
+	);
+	sectionLinks.forEach((_, id) => {
+		const el = document.getElementById(id);
+		if (el) spy.observe(el);
 	});
-});
 
-// Project search filter logic for dynamically loaded projects section
-function enableProjectSearchFilter() {
-	const searchInput = document.getElementById('project-search');
-	if (!searchInput) return;
-	const projectCards = document.querySelectorAll('.project-card');
-	searchInput.addEventListener('input', function() {
-		const query = searchInput.value.toLowerCase().replace(/,/g, ' ');
-		const terms = query.split(/\s+/).filter(Boolean);
-		projectCards.forEach(card => {
-			const techs = card.getAttribute('data-tech');
-			if (!terms.length) {
-				card.style.display = '';
-				return;
-			}
-			const matches = terms.every(term => techs.includes(term));
-			card.style.display = matches ? '' : 'none';
-		});
+	/* ---------- reveal on scroll ---------- */
+	const revealer = new IntersectionObserver(
+		(entries) => {
+			entries.forEach((e) => {
+				if (e.isIntersecting) {
+					e.target.classList.add("in");
+					revealer.unobserve(e.target);
+				}
+			});
+		},
+		{ threshold: 0.12 }
+	);
+	$$(".reveal").forEach((el, i) => {
+		el.style.transitionDelay = `${(i % 4) * 70}ms`;
+		revealer.observe(el);
 	});
-}
 
-// Patch the section loader to enable the filter after loading projects
-const origLoadSection = window.loadSection;
-window.loadSection = function(id, url) {
-	fetch(url)
-		.then(response => response.text())
-		.then(html => {
-			document.getElementById(id).innerHTML = html;
-			if (id === 'projects-section') {
-				enableProjectSearchFilter();
+	/* ---------- hero: rotating role text ---------- */
+	const typedEl = $("#typed");
+	const roles = [
+		"event-driven systems",
+		"Kafka & Flink pipelines",
+		"Spring Boot microservices",
+		"change data capture",
+		"cloud-native platforms",
+	];
+	if (!reduceMotion && typedEl) {
+		let r = 0, i = roles[0].length, deleting = true;
+		const tick = () => {
+			const word = roles[r];
+			if (deleting) {
+				i--;
+				if (i === 0) { deleting = false; r = (r + 1) % roles.length; }
+			} else {
+				i++;
+				if (i === roles[r].length) { deleting = true; typedEl.textContent = roles[r]; return setTimeout(tick, 2200); }
 			}
-		});
-};
+			typedEl.textContent = (deleting ? word : roles[r]).slice(0, i);
+			setTimeout(tick, deleting ? 35 : 70);
+		};
+		setTimeout(tick, 2600);
+	}
+
+	/* ---------- hero: career replayed as a Kafka topic ---------- */
+	const events = [
+		{ type: "EnrolledIn", degree: "BSc Computer Engineering", uni: "University of Peradeniya" },
+		{ type: "AwardWon", event: "IEEE Innovation Nation", place: 3, project: "ARCombat" },
+		{ type: "InternshipStarted", company: "GTN Technologies", stack: "Spring Boot · GraphQL" },
+		{ type: "ResearchCompleted", topic: "Latency-aware K8s scaling" },
+		{ type: "Graduated", gpa: 3.95 },
+		{ type: "RoleStarted", company: "ISA", title: "Software Engineer" },
+		{ type: "ProjectShipped", name: "Debezium CDC pipeline" },
+		{ type: "ProjectShipped", name: "Flink Academy" },
+		{ type: "NowLearning", topic: "Kafka Streams internals" },
+	];
+	const esc = (s) => String(s).replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[c]);
+	const renderEvent = (ev, offset) => {
+		const body = Object.entries(ev)
+			.map(([k, v]) => `<span class="k">"${esc(k)}"</span>:` + (typeof v === "number" ? `<span class="n">${v}</span>` : `<span class="s">"${esc(v)}"</span>`))
+			.join(", ");
+		return `<span class="term-line"><span class="meta">p${offset % 3}@${offset} </span>{${body}}</span>`;
+	};
+	const termLines = $("#termLines");
+	if (termLines) {
+		if (reduceMotion) {
+			termLines.innerHTML = events.map(renderEvent).join("");
+		} else {
+			let k = 0;
+			const push = () => {
+				if (k < events.length) {
+					termLines.insertAdjacentHTML("beforeend", renderEvent(events[k], k));
+					termLines.parentElement.scrollTop = termLines.parentElement.scrollHeight;
+					k++;
+					setTimeout(push, 650 + Math.random() * 500);
+				} else {
+					termLines.insertAdjacentHTML("beforeend", `<span class="term-line"><span class="meta">… caught up · lag 0 · waiting for the next event</span></span>`);
+				}
+			};
+			setTimeout(push, 900);
+		}
+	}
+
+	/* ---------- hero: event-stream canvas (producers → partitions → consumers) ---------- */
+	const canvas = $("#streamCanvas");
+	if (canvas && canvas.getContext) {
+		const ctx = canvas.getContext("2d");
+		const colors = ["#22d3ee", "#34d399", "#fbbf24", "#a78bfa"];
+		let w = 0, h = 0, dpr = 1, lanes = [], particles = [], raf = 0, visible = true;
+
+		const resize = () => {
+			dpr = Math.min(window.devicePixelRatio || 1, 2);
+			w = canvas.clientWidth; h = canvas.clientHeight;
+			canvas.width = w * dpr; canvas.height = h * dpr;
+			ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+			const count = Math.max(6, Math.floor(h / 70));
+			lanes = Array.from({ length: count }, (_, i) => ({ y: ((i + 0.5) * h) / count, speed: 0.6 + Math.random() * 1.2 }));
+			particles = [];
+			for (let i = 0; i < count * 4; i++) particles.push(spawn(Math.random() * w));
+			draw(0);
+		};
+		const spawn = (x = -20) => {
+			const lane = lanes[Math.floor(Math.random() * lanes.length)];
+			return { x, lane, len: 18 + Math.random() * 46, color: colors[Math.floor(Math.random() * colors.length)], v: lane.speed * (0.7 + Math.random() * 0.8) };
+		};
+		const draw = (t) => {
+			ctx.clearRect(0, 0, w, h);
+			// partition lanes with offset ticks
+			lanes.forEach((lane, i) => {
+				ctx.strokeStyle = "rgba(38,56,86,0.55)";
+				ctx.lineWidth = 1;
+				ctx.beginPath(); ctx.moveTo(0, lane.y); ctx.lineTo(w, lane.y); ctx.stroke();
+				ctx.fillStyle = "rgba(38,56,86,0.7)";
+				const shift = reduceMotion ? 0 : (t * 0.02 * lane.speed) % 60;
+				for (let x = -shift; x < w; x += 60) ctx.fillRect(x, lane.y - 3, 1, 6);
+				ctx.fillStyle = "rgba(91,107,133,0.9)";
+				ctx.font = "11px JetBrains Mono, monospace";
+				ctx.fillText(`partition-${i}`, w - 96, lane.y - 8);
+			});
+			// events
+			particles.forEach((p) => {
+				const grad = ctx.createLinearGradient(p.x - p.len, 0, p.x, 0);
+				grad.addColorStop(0, "transparent");
+				grad.addColorStop(1, p.color);
+				ctx.strokeStyle = grad;
+				ctx.lineWidth = 2;
+				ctx.beginPath(); ctx.moveTo(p.x - p.len, p.lane.y); ctx.lineTo(p.x, p.lane.y); ctx.stroke();
+				ctx.fillStyle = p.color;
+				ctx.shadowColor = p.color; ctx.shadowBlur = 10;
+				ctx.beginPath(); ctx.arc(p.x, p.lane.y, 2.6, 0, Math.PI * 2); ctx.fill();
+				ctx.shadowBlur = 0;
+			});
+		};
+		const loop = (t) => {
+			if (!visible) { raf = 0; return; }
+			particles.forEach((p, i) => {
+				p.x += p.v;
+				if (p.x - p.len > w) particles[i] = spawn();
+			});
+			draw(t);
+			raf = requestAnimationFrame(loop);
+		};
+		window.addEventListener("resize", resize);
+		resize();
+		if (!reduceMotion) {
+			new IntersectionObserver(([e]) => {
+				visible = e.isIntersecting;
+				if (visible && !raf) raf = requestAnimationFrame(loop);
+			}).observe(canvas);
+			document.addEventListener("visibilitychange", () => {
+				visible = !document.hidden;
+				if (visible && !raf) raf = requestAnimationFrame(loop);
+			});
+		}
+	}
+
+	/* ---------- architecture diagram: info panel + kafka partition traffic ---------- */
+	const info = $("#archInfo");
+	const nodes = $$("#archSvg .node");
+	const showNode = (node) => {
+		nodes.forEach((n) => n.classList.toggle("active", n === node));
+		$(".arch-k", info).textContent = node.dataset.title;
+		$(".arch-v", info).textContent = node.dataset.info;
+		$(".arch-p", info).textContent = "→ " + node.dataset.proj;
+	};
+	nodes.forEach((node) => {
+		node.addEventListener("mouseenter", () => showNode(node));
+		node.addEventListener("focus", () => showNode(node));
+		node.addEventListener("click", () => showNode(node));
+		node.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); showNode(node); } });
+	});
+
+	const dotsGroup = $("#partitionDots");
+	if (dotsGroup && !reduceMotion) {
+		const NS = "http://www.w3.org/2000/svg";
+		const rows = [209, 229, 249];
+		const kinds = ["", "c", "a"];
+		const live = [];
+		const addDot = () => {
+			const c = document.createElementNS(NS, "circle");
+			c.setAttribute("r", "3.2");
+			c.setAttribute("class", "p-dot " + kinds[Math.floor(Math.random() * kinds.length)]);
+			const row = rows[Math.floor(Math.random() * rows.length)];
+			c.setAttribute("cy", row);
+			dotsGroup.appendChild(c);
+			live.push({ el: c, x: 522, v: 0.8 + Math.random() * 0.9 });
+		};
+		let last = 0;
+		const step = (t) => {
+			if (t - last > 380) { addDot(); last = t; }
+			for (let i = live.length - 1; i >= 0; i--) {
+				const d = live[i];
+				d.x += d.v;
+				d.el.setAttribute("cx", d.x.toFixed(1));
+				if (d.x > 698) { d.el.remove(); live.splice(i, 1); }
+			}
+			requestAnimationFrame(step);
+		};
+		requestAnimationFrame(step);
+	}
+
+	/* ---------- footer year ---------- */
+	const year = $("#year");
+	if (year) year.textContent = new Date().getFullYear();
+})();

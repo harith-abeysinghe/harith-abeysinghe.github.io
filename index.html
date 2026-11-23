@@ -1,220 +1,357 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Harith - Software Engineer Portfolio</title>
-		<script src="https://cdn.tailwindcss.com"></script>
-		<link
-			rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-		/>
-		<link rel="stylesheet" href="css/style.css" />
-	</head>
-	<body class="antialiased">
-		<!-- Custom Cursor -->
-		<div class="cursor"></div>
-		<div class="cursor-follower"></div>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Harith Abeysinghe · Backend & Event-Driven Systems Engineer</title>
+	<meta name="description" content="Harith Abeysinghe: backend software engineer building event-driven systems with Java, Spring Boot, Apache Kafka, Flink and Kubernetes." />
+	<meta property="og:title" content="Harith Abeysinghe · Backend & Event-Driven Systems Engineer" />
+	<meta property="og:description" content="Spring Boot services, Kafka and Flink pipelines, change data capture and Kubernetes." />
+	<meta property="og:image" content="https://harith-abeysinghe.github.io/assets/profile-480.png" />
+	<meta name="theme-color" content="#060a13" />
+	<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23060a13'/%3E%3Cpath d='M7 10h10M7 16h18M7 22h12' stroke='%2322d3ee' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='22' cy='10' r='2.5' fill='%2334d399'/%3E%3Ccircle cx='24' cy='22' r='2.5' fill='%23fbbf24'/%3E%3C/svg%3E" />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+	<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+	<!-- ============ NAV ============ -->
+	<header class="nav" id="nav">
+		<a href="#home" class="brand" aria-label="Back to top">
+			<span class="brand-dot"></span>harith<span class="muted">.abeysinghe</span>
+		</a>
+		<nav class="nav-links" id="navLinks" aria-label="Sections">
+			<a href="#about">about</a>
+			<a href="#architecture">architecture</a>
+			<a href="#projects">projects</a>
+			<a href="#experience">experience</a>
+			<a href="#contact">contact</a>
+		</nav>
+		<button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+			<span></span><span></span><span></span>
+		</button>
+	</header>
 
-		<!-- Navigation -->
-		<nav
-			class="fixed w-full z-50 bg-black bg-opacity-60 backdrop-filter backdrop-blur-lg"
-			id="main-nav"
-		>
-			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-				<div class="flex items-center justify-between h-16">
-					<div class="flex items-center">
-						<span class="text-white font-bold text-xl"
-							>Harith<span class="gradient-text">.</span></span
-						>
-					</div>
-					<div class="hidden md:block">
-						<div class="ml-10 flex items-baseline space-x-8">
-							<a
-								href="#home"
-								class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition duration-300"
-								>Home</a
-							>
-							<a
-								href="#about"
-								class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition duration-300"
-								>About</a
-							>
-							<a
-								href="#projects"
-								class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition duration-300"
-								>Projects</a
-							>
-							<a
-								href="#experience"
-								class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition duration-300"
-								>Experience</a
-							>
-							<a
-								href="#contact"
-								class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition duration-300"
-								>Contact</a
-							>
-						</div>
-					</div>
-					<div class="md:hidden">
-						<button class="text-gray-300 hover:text-white focus:outline-none">
-							<svg
-								class="h-6 w-6"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke="currentColor"
-							>
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M4 6h16M4 12h16M4 18h16"
-								></path>
-							</svg>
-						</button>
+	<main>
+		<!-- ============ HERO ============ -->
+		<section class="hero" id="home">
+			<canvas id="streamCanvas" aria-hidden="true"></canvas>
+			<div class="hero-inner">
+				<div class="hero-text reveal">
+					<p class="eyebrow"><span class="pulse"></span>producer: <b>harith</b> · topic: <b>backend.engineering</b> · status: <b class="ok">LIVE</b></p>
+					<h1>Harith<br /><span class="grad">Abeysinghe</span></h1>
+					<p class="role">Backend engineer building <span class="typed" id="typed">event-driven systems</span><span class="caret">|</span></p>
+					<p class="lede">
+						I design services that talk in <strong>events</strong>: Spring Boot microservices, Apache Kafka and Flink pipelines,
+						change data capture, and Kubernetes platforms where latency and correctness matter.
+						Software Engineer at <strong>ISA</strong>.
+					</p>
+					<div class="cta">
+						<a class="btn btn-primary" href="#projects">View projects</a>
+						<a class="btn btn-linkedin" href="https://www.linkedin.com/in/harith-abeysinghe/" target="_blank" rel="noopener">
+							<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.850 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+							Connect on LinkedIn
+						</a>
+						<a class="btn btn-ghost" href="https://github.com/harith-abeysinghe" target="_blank" rel="noopener" aria-label="GitHub profile">
+							<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.7 1.6.2 2.900.1 3.2.8.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
+							GitHub
+						</a>
 					</div>
 				</div>
-			</div>
-		</nav>
 
-		<!-- Hero Section -->
-		<section
-			id="home"
-			class="min-h-screen flex items-center justify-center relative overflow-hidden hero-pattern"
-		>
-			<div class="absolute inset-0 tech-grid"></div>
-			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 fade-in">
-				<div class="flex flex-col md:flex-row items-center justify-between">
-					<div class="md:w-1/2 mb-10 md:mb-0 order-2 md:order-1 w-full">
-						<h1 class="text-4xl md:text-6xl font-bold mb-4">
-							Hi, I'm <span class="gradient-text">Harith</span>
-						</h1>
-						<!-- Mobile image -->
-						<div class="block md:hidden w-full flex justify-center mb-6">
-							<div class="relative">
-								<div class="w-64 h-64 rounded-full bg-gradient-to-br from-blue-500 to-emerald-500 opacity-20 absolute inset-0 blur-2xl animate-pulse"></div>
-								<div class="w-64 h-64 rounded-full absolute inset-0 border-2 border-blue-500 opacity-0 hover:opacity-100 transition-opacity duration-1000 animate-pulse"></div>
-								<div class="w-64 h-64 rounded-full overflow-hidden border-4 border-gray-700 relative flex items-center justify-center">
-									<img src="assets/profile-pic.png" alt="Harith Abeysinghe" class="w-full h-full object-cover" />
-								</div>
-							</div>
-						</div>
-						<h2 class="text-2xl md:text-3xl font-semibold text-gray-300 mb-6">
-							Software Engineer & Problem Solver
-						</h2>
-						<p class="text-lg text-gray-400 mb-8 max-w-lg">
-							I build scalable, efficient solutions with clean code and modern
-							technologies. Passionate about creating impactful software that
-							makes a difference.
-						</p>
-						<div class="flex flex-col space-y-4">
-							<!-- Top buttons -->
-							<div class="flex space-x-4">
-								<a
-									href="#projects"
-									class="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-md text-white font-medium transition duration-300 transform hover:scale-105"
-								>
-									View My Work
-								</a>
-								<a
-									href="#contact"
-									class="btn matrix px-6 py-3 border border-gray-600 hover:border-blue-500 rounded-md text-white font-medium transition duration-300 transform hover:scale-105"
-								>
-									<div class="code-rain"></div>
-									Contact Me
-								</a>
-							</div>
-
-							<!-- Download CV Button -->
-							<div class="flex space-x-4">
-								<a
-									href="assets/Harith%20Abeysinghe%20CV.pdf"
-									download
-									class="btn btn-border-reveal flex items-center justify-center px-6 py-3 bg-green-800 rounded-md text-white font-medium transition duration-300 transform hover:scale-105"
-								>
-									Download My CV
-								</a>
-							</div>
-						</div>
+				<div class="terminal reveal" aria-label="Career events replayed as a Kafka topic">
+					<div class="term-bar">
+						<span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+						<span class="term-title">harith@cluster: ~</span>
 					</div>
-					<!-- Desktop image -->
-					<div class="md:w-1/2 flex justify-center order-1 md:order-2 hidden md:flex">
-						<div class="relative">
-							<div class="w-64 h-64 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-blue-500 to-emerald-500 opacity-20 absolute inset-0 blur-2xl animate-pulse"></div>
-							<div class="w-64 h-64 md:w-80 md:h-80 rounded-full absolute inset-0 border-2 border-blue-500 opacity-0 hover:opacity-100 transition-opacity duration-1000 animate-pulse"></div>
-							<div class="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-gray-700 relative flex items-center justify-center">
-								<img src="assets/profile-pic.png" alt="Harith Abeysinghe" class="w-full h-full object-cover" />
-							</div>
-						</div>
+					<pre class="term-body"><span class="prompt">$</span> kafka-console-consumer --topic harith.career --from-beginning
+<span id="termLines"></span><span class="term-cursor">▋</span></pre>
+				</div>
+			</div>
+			<a href="#about" class="scroll-hint" aria-label="Scroll to about">
+				<span>consume next</span>
+				<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16l-6-6h12z"/></svg>
+			</a>
+		</section>
+
+		<!-- ============ ABOUT ============ -->
+		<section class="section" id="about">
+			<div class="section-head reveal">
+				<span class="topic">topic: profile.about · partition 0</span>
+				<h2>About me</h2>
+			</div>
+			<div class="about-grid">
+				<div class="photo-wrap reveal">
+					<div class="orbit"><span></span><span></span><span></span></div>
+					<img src="assets/profile-480.png" alt="Harith Abeysinghe" width="480" height="480" loading="lazy" />
+				</div>
+				<div class="about-text reveal">
+					<p>
+						I'm a backend-focused software engineer who enjoys the parts of a system most people never see:
+						how services exchange events, how data stays consistent across them, and how the whole thing behaves under load.
+					</p>
+					<p>
+						I work mostly with <strong>Java and Spring Boot</strong>, stream data through <strong>Apache Kafka</strong> and
+						<strong>Apache Flink</strong>, capture database changes with <strong>Debezium</strong>, and run it all on
+						<strong>Docker and Kubernetes</strong> with Prometheus watching. My final-year research looked at resizing
+						Kubernetes workloads on the fly without breaking latency targets.
+					</p>
+					<p>
+						Right now I'm going deep on stream processing internals (Kafka Streams, consumer-group rebalancing, Flink state and
+						checkpointing) and building interactive tools that teach them.
+					</p>
+					<div class="stats">
+						<div class="stat"><b>3.95</b><span>GPA · BSc (Hons) Computer Engineering, University of Peradeniya</span></div>
+						<div class="stat"><b>ISA</b><span>Software Engineer since Sept 2025</span></div>
+						<div class="stat"><b>LK</b><span>Panadura, Sri Lanka</span></div>
 					</div>
 				</div>
 			</div>
 		</section>
 
-		<!-- Section placeholders -->
-		<div id="about-section"></div>
-		<div id="projects-section"></div>
-		<div id="experience-section"></div>
-		<div id="achievements-section"></div>
-		<div id="contact-section"></div>
+		<!-- ============ ARCHITECTURE ============ -->
+		<section class="section" id="architecture">
+			<div class="section-head reveal">
+				<span class="topic">topic: systems.design · partition 1</span>
+				<h2>The kind of systems I build</h2>
+				<p class="section-sub">An event-driven backend, and the projects where I built each piece. Hover or tap a component.</p>
+			</div>
+			<div class="arch reveal">
+				<div class="arch-scroll">
+				<svg id="archSvg" viewBox="0 0 1000 440" role="img" aria-label="Event-driven architecture: a client calls Spring Boot services, which write to PostgreSQL and Redis and publish to Kafka; Debezium streams database changes into Kafka; Flink and consumers process the stream; Prometheus scrapes everything; all running on Kubernetes.">
+					<defs>
+						<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+							<path d="M0 0L10 5L0 10z" class="arrow-head" />
+						</marker>
+						<linearGradient id="kafkaGrad" x1="0" x2="1">
+							<stop offset="0" stop-color="#22d3ee" stop-opacity=".16" />
+							<stop offset="1" stop-color="#34d399" stop-opacity=".16" />
+						</linearGradient>
+					</defs>
 
-		<!-- Footer -->
-		<footer class="bg-black py-12 border-t border-gray-800">
-			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-				<div class="flex flex-col md:flex-row justify-between items-center">
-					<div class="mb-6 md:mb-0">
-						<span class="text-white font-bold text-xl"
-							>Harith<span class="gradient-text">.</span></span
-						>
-					</div>
-					<div class="flex flex-col items-center md:items-end">
-						<p class="text-gray-500 mb-4 text-center md:text-right">
-							© 2025 Harith. All rights reserved.
-						</p>
-						<div class="flex space-x-6">
-							<a
-								href="https://github.com/harith-abeysinghe"
-								class="text-gray-500 hover:text-white transition duration-300"
-							>
-								<span class="sr-only">GitHub</span>
-								<i class="fab fa-github"></i>
-							</a>
-							<a
-								href="https://www.linkedin.com/in/harith-abeysinghe/"
-								class="text-gray-500 hover:text-white transition duration-300"
-							>
-								<span class="sr-only">LinkedIn</span>
-								<i class="fab fa-linkedin-in"></i>
-							</a>
-							<!-- <a
-								href="#"
-								class="text-gray-500 hover:text-white transition duration-300"
-							>
-								<span class="sr-only">Twitter</span>
-								<i class="fab fa-twitter"></i>
-							</a> -->
-						</div>
-					</div>
+					<rect x="150" y="20" width="830" height="410" rx="18" class="k8s-box" />
+					<text x="170" y="46" class="k8s-label">kubernetes · requests/limits · autoscaling</text>
+
+					<path d="M110 220 H186" class="link flow" marker-end="url(#arrow)" />
+					<path d="M330 190 C380 150 380 105 416 100" class="link flow" marker-end="url(#arrow)" />
+					<path d="M330 250 C380 290 380 335 416 340" class="link flow" marker-end="url(#arrow)" />
+					<path d="M330 220 H496" class="link flow hot" marker-end="url(#arrow)" />
+					<path d="M530 340 C600 340 610 300 610 274" class="link flow cdc" marker-end="url(#arrow)" />
+					<path d="M720 200 C760 160 770 115 796 110" class="link flow hot" marker-end="url(#arrow)" />
+					<path d="M720 240 C760 280 770 325 796 330" class="link flow hot" marker-end="url(#arrow)" />
+					<path d="M260 262 V385" class="link dashed" />
+
+					<g class="node" tabindex="0" data-title="client" data-info="Clients call REST APIs secured with JWT access tokens and rotating refresh tokens." data-proj="Secure Expense Tracker API">
+						<rect x="20" y="190" width="90" height="60" rx="12" />
+						<text x="65" y="225" class="node-title">client</text>
+					</g>
+					<g class="node" tabindex="0" data-title="spring boot services" data-info="Layered Spring Boot services: validated input, Flyway migrations, Testcontainers tests, CI on every push." data-proj="Secure Expense Tracker API · cache-strategies">
+						<rect x="190" y="180" width="140" height="80" rx="14" class="svc" />
+						<text x="260" y="214" class="node-title">spring boot</text>
+						<text x="260" y="236" class="node-sub">microservices</text>
+					</g>
+					<g class="node" tabindex="0" data-title="redis" data-info="Redis in front of PostgreSQL: cache-aside with eviction on update, and write-through." data-proj="cache-strategies">
+						<rect x="420" y="70" width="110" height="60" rx="12" class="store" />
+						<text x="475" y="98" class="node-title">redis</text>
+						<text x="475" y="117" class="node-sub">cache</text>
+					</g>
+					<g class="node" tabindex="0" data-title="postgresql" data-info="The source of truth. Its write-ahead log feeds change data capture." data-proj="Debezium CDC · Secure Expense Tracker API">
+						<rect x="420" y="310" width="110" height="60" rx="12" class="store" />
+						<text x="475" y="338" class="node-title">postgres</text>
+						<text x="475" y="357" class="node-sub">WAL → CDC</text>
+					</g>
+					<g class="node kafka" tabindex="0" data-title="apache kafka" data-info="Partitioned topics, consumer groups and rebalancing, replay from any offset. KRaft mode, no ZooKeeper." data-proj="Debezium CDC pipeline">
+						<rect x="500" y="170" width="220" height="100" rx="14" fill="url(#kafkaGrad)" class="kafka-box" />
+						<text x="610" y="192" class="node-title">apache kafka</text>
+						<rect x="516" y="202" width="188" height="14" rx="4" class="partition" />
+						<rect x="516" y="222" width="188" height="14" rx="4" class="partition" />
+						<rect x="516" y="242" width="188" height="14" rx="4" class="partition" />
+						<g id="partitionDots"></g>
+					</g>
+					<text x="572" y="332" class="edge-label">debezium</text>
+					<g class="node" tabindex="0" data-title="apache flink" data-info="Keyed state, event-time windows and watermarks, checkpoints and exactly-once sinks." data-proj="Flink Academy">
+						<rect x="800" y="70" width="150" height="80" rx="14" class="svc" />
+						<text x="875" y="104" class="node-title">flink</text>
+						<text x="875" y="126" class="node-sub">stream processing</text>
+					</g>
+					<g class="node" tabindex="0" data-title="consumers" data-info="Downstream consumers fan events out to analytics, alerts and other services." data-proj="CAL Fund Analysis · Crypto news bot">
+						<rect x="800" y="290" width="150" height="80" rx="14" class="svc" />
+						<text x="875" y="324" class="node-title">consumers</text>
+						<text x="875" y="346" class="node-sub">analytics · alerts</text>
+					</g>
+					<g class="node" tabindex="0" data-title="observability" data-info="Prometheus scrapes every service and Grafana charts it. JMeter load tests measure latency under pressure." data-proj="Kubernetes latency research · monitoring demo">
+						<rect x="190" y="385" width="140" height="36" rx="10" class="obs" />
+						<text x="260" y="408" class="node-title small">prometheus</text>
+					</g>
+				</svg>
+				</div>
+				<div class="arch-info" id="archInfo" aria-live="polite">
+					<span class="arch-k">hover or tap a component</span>
+					<span class="arch-v">Each piece maps to a project where I built it.</span>
+					<span class="arch-p"></span>
 				</div>
 			</div>
-		</footer>
+		</section>
 
-		<script>
-		function loadSection(id, url) {
-			fetch(url)
-				.then(response => response.text())
-				.then(html => {
-					document.getElementById(id).innerHTML = html;
-				});
-		}
-		loadSection('about-section', 'sections/about.html');
-		loadSection('projects-section', 'sections/projects.html');
-		loadSection('experience-section', 'sections/experience.html');
-		loadSection('achievements-section', 'sections/achievements.html');
-		loadSection('contact-section', 'sections/contact.html');
-		</script>
+		<!-- ============ STACK ============ -->
+		<section class="section" id="stack">
+			<div class="section-head reveal">
+				<span class="topic">topic: skills.stack · partition 2</span>
+				<h2>Tech stack</h2>
+			</div>
+			<div class="stack-grid">
+				<div class="stack-card reveal"><h3>Languages</h3><ul><li>Java</li><li>Python</li><li>TypeScript</li><li>JavaScript</li><li>SQL</li><li>Go</li></ul></div>
+				<div class="stack-card reveal"><h3>Backend</h3><ul><li>Spring Boot</li><li>Spring Security</li><li>Spring Data JPA</li><li>Node.js</li><li>GraphQL</li><li>REST</li></ul></div>
+				<div class="stack-card reveal hl"><h3>Streaming &amp; EDA</h3><ul><li>Apache Kafka</li><li>Apache Flink</li><li>Debezium CDC</li><li>Kafka Streams</li><li>Apache Beam</li></ul></div>
+				<div class="stack-card reveal"><h3>Data</h3><ul><li>PostgreSQL</li><li>MySQL</li><li>Redis</li><li>MongoDB</li><li>Flyway</li></ul></div>
+				<div class="stack-card reveal"><h3>Cloud &amp; Ops</h3><ul><li>Kubernetes</li><li>Docker</li><li>Prometheus</li><li>Grafana</li><li>GitHub Actions</li><li>AWS</li></ul></div>
+				<div class="stack-card reveal"><h3>Quality</h3><ul><li>JUnit 5</li><li>Testcontainers</li><li>JMeter</li><li>OpenAPI</li></ul></div>
+			</div>
+		</section>
 
-		<script src="scripts/main.js"></script>
-	</body>
+		<!-- ============ PROJECTS ============ -->
+		<section class="section" id="projects">
+			<div class="section-head reveal">
+				<span class="topic">topic: work.projects · partition 3</span>
+				<h2>Featured projects</h2>
+			</div>
+			<div class="project-grid">
+				<article class="project reveal">
+					<div class="p-meta"><span class="offset">offset 0</span><span class="tag eda">streaming</span></div>
+					<h3>Flink Academy</h3>
+					<p>Interactive study app for Apache Flink and Beam on Flink: 15 unlockable levels, animated lesson diagrams, quizzes, and a Pipeline Lab that <b>simulates a Flink cluster</b> and draws the job graph like the real dashboard.</p>
+					<ul class="chips"><li>JavaScript</li><li>Python</li><li>Apache Flink</li><li>Docker</li></ul>
+					<a class="p-link" href="https://github.com/harith-abeysinghe/flink-academy" target="_blank" rel="noopener">view code →</a>
+				</article>
+				<article class="project reveal">
+					<div class="p-meta"><span class="offset">offset 1</span><span class="tag">backend</span></div>
+					<h3>Secure Expense Tracker API</h3>
+					<p>Production-style REST API with <b>rotating refresh tokens and reuse detection</b>, tenant isolation, role-based admin, Flyway migrations, Testcontainers tests and CI.</p>
+					<ul class="chips"><li>Java</li><li>Spring Boot</li><li>Spring Security</li><li>PostgreSQL</li></ul>
+					<a class="p-link" href="https://github.com/harith-abeysinghe/secure-expense-tracker-api" target="_blank" rel="noopener">view code →</a>
+				</article>
+				<article class="project reveal">
+					<div class="p-meta"><span class="offset">offset 2</span><span class="tag eda">CDC</span></div>
+					<h3>Debezium CDC Pipeline</h3>
+					<p>Streams every insert, update and delete from <b>PostgreSQL's write-ahead log into Kafka</b> (KRaft mode) with Debezium, consumed by a Spring Boot service.</p>
+					<ul class="chips"><li>Debezium</li><li>Kafka</li><li>PostgreSQL</li><li>Spring Boot</li></ul>
+					<a class="p-link" href="https://github.com/harith-abeysinghe/debezium-example" target="_blank" rel="noopener">view code →</a>
+				</article>
+				<article class="project reveal">
+					<div class="p-meta"><span class="offset">offset 3</span><span class="tag">research</span></div>
+					<h3>Latency-Aware Resource Management in Kubernetes</h3>
+					<p>Final-year research: an auto-updater reads Prometheus history and <b>resizes pod CPU and memory live</b>, while load tests measure the latency cost of each change.</p>
+					<ul class="chips"><li>Kubernetes</li><li>Prometheus</li><li>Python</li><li>Go</li></ul>
+					<a class="p-link" href="https://github.com/harith-abeysinghe/e19-4yp-AI-Dirven-Latency-Constrained-Resource-Management-In-Kubernetes" target="_blank" rel="noopener">view code →</a>
+				</article>
+				<article class="project reveal">
+					<div class="p-meta"><span class="offset">offset 4</span><span class="tag">data</span></div>
+					<h3>CAL Fund Analysis</h3>
+					<p>Pipeline that tracks daily prices of 15 unit trusts since 2014, cleans bad data, and scores each fund on <b>return and risk</b>. Updates itself on a GitHub Actions schedule.</p>
+					<ul class="chips"><li>Python</li><li>GitHub Actions</li><li>Next.js</li></ul>
+					<a class="p-link" href="https://github.com/harith-abeysinghe/cal-fund-analysis" target="_blank" rel="noopener">view code →</a>
+				</article>
+				<article class="project reveal">
+					<div class="p-meta"><span class="offset">offset 5</span><span class="tag eda">events</span></div>
+					<h3>Crypto News Scraper &amp; Telegram Bot</h3>
+					<p>Scrapes crypto news by topic, de-duplicates articles in MongoDB, and <b>pushes new ones to a Telegram channel</b> through a bot.</p>
+					<ul class="chips"><li>Python</li><li>MongoDB</li><li>Telegram API</li></ul>
+					<a class="p-link" href="https://github.com/harith-abeysinghe/web_scraper_telegram_bot" target="_blank" rel="noopener">view code →</a>
+				</article>
+			</div>
+
+			<h3 class="sub-head reveal">University &amp; team projects</h3>
+			<div class="mini-grid">
+				<a class="mini reveal" href="https://github.com/harith-abeysinghe/e19-co544-Hand-Tremor-Based-Biometric-Recognition" target="_blank" rel="noopener">
+					<b>Hand-Tremor Biometric Recognition</b><span>ML pipeline identifying people from Leap Motion tremor signals · 95.9% accuracy</span>
+				</a>
+				<a class="mini reveal" href="https://github.com/harith-abeysinghe/e19-3yp-First-Person-AR-Game-with-Localization" target="_blank" rel="noopener">
+					<b>ARCombat</b><span>First-person AR shooter with shared AR sessions · 3rd place, IEEE Innovation Nation (Central Province)</span>
+				</a>
+				<a class="mini reveal" href="https://cepdnaclk.github.io/escal-new/" target="_blank" rel="noopener">
+					<b>ESCAL Lab Website</b><span>Department lab site with project data pulled automatically from APIs</span>
+				</a>
+				<a class="mini reveal" href="https://github.com/harith-abeysinghe/e19-co225-baby-tracking-system-mobileapp" target="_blank" rel="noopener">
+					<b>Baby Development Tracker</b><span>Android app tracking development from 0 to 5 years for parents and clinicians</span>
+				</a>
+			</div>
+		</section>
+
+		<!-- ============ EXPERIENCE ============ -->
+		<section class="section" id="experience">
+			<div class="section-head reveal">
+				<span class="topic">topic: career.timeline · partition 4</span>
+				<h2>Experience</h2>
+			</div>
+			<ol class="timeline">
+				<li class="reveal">
+					<span class="t-offset">offset 2</span>
+					<div class="t-card">
+						<div class="t-head"><h3>Software Engineer</h3><span class="t-date">Sept 2025 – present</span></div>
+						<p class="t-org">ISA</p>
+					</div>
+				</li>
+				<li class="reveal">
+					<span class="t-offset">offset 1</span>
+					<div class="t-card">
+						<div class="t-head"><h3>Software Engineer Intern</h3><span class="t-date">July 2024 – Jan 2025</span></div>
+						<p class="t-org">GTN Technologies (Pvt) Ltd</p>
+						<ul>
+							<li>Helped rewrite a legacy system on a modern microservices architecture.</li>
+							<li>Built backend services with clean API design and consistent data across services.</li>
+							<li>Optimised APIs and database schemas to cut response latency.</li>
+							<li>Built frontend components in a micro-frontend architecture.</li>
+						</ul>
+						<ul class="chips"><li>Java</li><li>Spring Boot</li><li>PostgreSQL</li><li>GraphQL</li><li>TypeScript</li><li>React</li><li>AWS</li></ul>
+					</div>
+				</li>
+				<li class="reveal">
+					<span class="t-offset">offset 0</span>
+					<div class="t-card">
+						<div class="t-head"><h3>BSc (Hons) Computer Engineering</h3><span class="t-date">GPA 3.95 / 4.00</span></div>
+						<p class="t-org">University of Peradeniya</p>
+					</div>
+				</li>
+			</ol>
+
+			<h3 class="sub-head reveal">Achievements</h3>
+			<div class="mini-grid three">
+				<div class="mini reveal"><b>Machine Learning Specialization</b><span>DeepLearning.AI &amp; Stanford University · June 2024</span></div>
+				<div class="mini reveal"><b>IEEE Innovation Nation Sri Lanka</b><span>3rd place, Central Province · presented ARCombat</span></div>
+				<div class="mini reveal"><b>ACESCoders v11.0</b><span>11th of 150+ in a 12-hour inter-university coding contest</span></div>
+			</div>
+		</section>
+
+		<!-- ============ CONTACT ============ -->
+		<section class="section contact" id="contact">
+			<div class="section-head reveal">
+				<span class="topic">topic: inbox · partition 5</span>
+				<h2>Let's build something</h2>
+				<p class="section-sub">Open to conversations about backend, streaming and distributed-systems work.</p>
+			</div>
+			<div class="contact-row reveal">
+				<a class="btn btn-linkedin big" href="https://www.linkedin.com/in/harith-abeysinghe/" target="_blank" rel="noopener">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+					Connect on LinkedIn
+				</a>
+				<a class="btn btn-ghost big" href="mailto:harithabeysinghe@gmail.com">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5h20v14H2zm2 2v.5l8 5 8-5V7zm16 2.8-8 5-8-5V17h16z"/></svg>
+					harithabeysinghe@gmail.com
+				</a>
+				<a class="btn btn-ghost big" href="https://github.com/harith-abeysinghe" target="_blank" rel="noopener">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.7 1.6.2 2.9.1 3.2.8.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
+					github.com/harith-abeysinghe
+				</a>
+			</div>
+		</section>
+	</main>
+
+	<footer class="footer">
+		<span><span class="brand-dot"></span>harith.abeysinghe</span>
+		<span class="muted">consumer lag: 0 · © <span id="year">2026</span></span>
+	</footer>
+
+	<script src="scripts/main.js"></script>
+</body>
 </html>
