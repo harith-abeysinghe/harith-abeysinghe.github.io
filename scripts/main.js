@@ -198,51 +198,6 @@
 		}
 	}
 
-	/* ---------- architecture diagram: info panel + kafka partition traffic ---------- */
-	const info = $("#archInfo");
-	const nodes = $$("#archSvg .node");
-	const showNode = (node) => {
-		nodes.forEach((n) => n.classList.toggle("active", n === node));
-		$(".arch-k", info).textContent = node.dataset.title;
-		$(".arch-v", info).textContent = node.dataset.info;
-		$(".arch-p", info).textContent = "→ " + node.dataset.proj;
-	};
-	nodes.forEach((node) => {
-		node.addEventListener("mouseenter", () => showNode(node));
-		node.addEventListener("focus", () => showNode(node));
-		node.addEventListener("click", () => showNode(node));
-		node.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); showNode(node); } });
-	});
-
-	const dotsGroup = $("#partitionDots");
-	if (dotsGroup && !reduceMotion) {
-		const NS = "http://www.w3.org/2000/svg";
-		const rows = [209, 229, 249];
-		const kinds = ["", "c", "a"];
-		const live = [];
-		const addDot = () => {
-			const c = document.createElementNS(NS, "circle");
-			c.setAttribute("r", "3.2");
-			c.setAttribute("class", "p-dot " + kinds[Math.floor(Math.random() * kinds.length)]);
-			const row = rows[Math.floor(Math.random() * rows.length)];
-			c.setAttribute("cy", row);
-			dotsGroup.appendChild(c);
-			live.push({ el: c, x: 522, v: 0.8 + Math.random() * 0.9 });
-		};
-		let last = 0;
-		const step = (t) => {
-			if (t - last > 380) { addDot(); last = t; }
-			for (let i = live.length - 1; i >= 0; i--) {
-				const d = live[i];
-				d.x += d.v;
-				d.el.setAttribute("cx", d.x.toFixed(1));
-				if (d.x > 698) { d.el.remove(); live.splice(i, 1); }
-			}
-			requestAnimationFrame(step);
-		};
-		requestAnimationFrame(step);
-	}
-
 	/* ---------- footer year ---------- */
 	const year = $("#year");
 	if (year) year.textContent = new Date().getFullYear();
